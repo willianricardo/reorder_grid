@@ -9,6 +9,7 @@ class ReorderGridTile {
   final Key key;
   final int mainAxisCellCount;
   final int crossAxisCellCount;
+  final double borderRadius;
   final Widget child;
 
   const ReorderGridTile.count({
@@ -16,6 +17,7 @@ class ReorderGridTile {
     this.mainAxisCellCount = 1,
     this.crossAxisCellCount = 1,
     required this.child,
+    this.borderRadius = 8.0,
   });
 
   @override
@@ -25,11 +27,17 @@ class ReorderGridTile {
           runtimeType == other.runtimeType &&
           key == other.key &&
           mainAxisCellCount == other.mainAxisCellCount &&
-          crossAxisCellCount == other.crossAxisCellCount;
+          crossAxisCellCount == other.crossAxisCellCount &&
+          child == other.child &&
+          borderRadius == other.borderRadius;
 
   @override
   int get hashCode =>
-      key.hashCode ^ mainAxisCellCount.hashCode ^ crossAxisCellCount.hashCode;
+      key.hashCode ^
+      mainAxisCellCount.hashCode ^
+      crossAxisCellCount.hashCode ^
+      child.hashCode ^
+      borderRadius.hashCode;
 }
 
 /// A grid that allows users to reorder its children through dragging.
@@ -52,7 +60,7 @@ class ReorderGrid extends StatefulWidget {
     this.showSlotBorders = true,
     this.onReorder,
     required this.children,
-    this.borderRadius = 12.0,
+    this.borderRadius = 8.0,
   });
 
   @override
